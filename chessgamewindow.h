@@ -2,13 +2,14 @@
 #define CHESSGAMEWINDOW_H
 
 #include <QMainWindow>
+#include <QGraphicsView>
+#include <QGraphicsScene>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class ChessGameWindow; }
 QT_END_NAMESPACE
 
-class ChessGameWindow : public QMainWindow
-{
+class ChessGameWindow : public QMainWindow {
     Q_OBJECT
 
 public:
@@ -21,5 +22,6 @@ private:
 
 private:
     Ui::ChessGameWindow *ui;
+    QGraphicsScene*     _boardGui{nullptr};
 };
 #endif // CHESSGAMEWINDOW_H
