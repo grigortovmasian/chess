@@ -7,6 +7,7 @@
 #include <QGraphicsRectItem>
 #include <QHBoxLayout>
 #include <QBrush>
+#include <QGraphicsPixmapItem>
 
 ChessGameWindow::ChessGameWindow(QWidget *parent)
     : QMainWindow(parent)
