@@ -21,7 +21,7 @@ char getSymbolFromType(const CChessPieceType& type) {
     case CChessPieceType::QUEEN: return 'Q';
     case CChessPieceType::ROCK: return 'R';
     case CChessPieceType::BISHOP: return 'B';
-    case CChessPieceType::NIGHT: return 'N';
+    case CChessPieceType::KNIGHT: return 'N';
     case CChessPieceType::PAWN: return 'P';
     default: Q_ASSERT(false); return '\0';
     }

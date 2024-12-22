@@ -13,7 +13,7 @@ enum CChessPieceType {
     QUEEN,
     ROCK,
     BISHOP,
-    NIGHT,
+    KNIGHT,
     PAWN
 };
 

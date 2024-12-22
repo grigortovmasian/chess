@@ -10,12 +10,24 @@ CONFIG += c++11
 
 SOURCES += \
     ChessPieces/cchesspiece.cpp \
+    ChessPieces/cchesspiecebishop.cpp \
+    ChessPieces/cchesspieceking.cpp \
+    ChessPieces/cchesspieceknight.cpp \
+    ChessPieces/cchesspiecepawn.cpp \
+    ChessPieces/cchesspiecequeen.cpp \
+    ChessPieces/cchesspiecerock.cpp \
     GameEngine/cboardposition.cpp \
     main.cpp \
     chessgamewindow.cpp
 
 HEADERS += \
     ChessPieces/cchesspiece.h \
+    ChessPieces/cchesspiecebishop.h \
+    ChessPieces/cchesspieceking.h \
+    ChessPieces/cchesspieceknight.h \
+    ChessPieces/cchesspiecepawn.h \
+    ChessPieces/cchesspiecequeen.h \
+    ChessPieces/cchesspiecerock.h \
     GameEngine/cboardposition.h \
     chessgamewindow.h
 
