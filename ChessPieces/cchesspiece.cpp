@@ -10,11 +10,13 @@ CChessPiece::CChessPiece(const QString& name) {
 }
 
 CChessPiece::~CChessPiece() {
-    delete _imageGraphicItem;
+    if (_imageGraphicItem) {
+        delete _imageGraphicItem;
+    }
 }
 
-char CChessPiece::getSymbol() const {
-    switch (_type) {
+char getSymbolFromType(const CChessPieceType& type) {
+    switch (type) {
     case CChessPieceType::KING: return 'K';
     case CChessPieceType::QUEEN: return 'Q';
     case CChessPieceType::ROCK: return 'R';
