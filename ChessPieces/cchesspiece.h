@@ -21,7 +21,7 @@ char getSymbolFromType(const CChessPieceType& type);
 
 class CChessPiece {
 public:
-    CChessPiece(const QString& name);
+    CChessPiece(const QString& name, QGraphicsItem* parent);
     virtual ~CChessPiece();
 
     virtual char getSymbol() const = 0;

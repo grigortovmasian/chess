@@ -4,23 +4,26 @@
 #include <QAction>
 #include <QToolBar>
 #include <QWidget>
-#include <QGraphicsRectItem>
 #include <QHBoxLayout>
-#include <QBrush>
-#include <QGraphicsPixmapItem>
 
-ChessGameWindow::ChessGameWindow(QWidget *parent)
+ChessGameWindow::ChessGameWindow(QWidget* parent)
     : QMainWindow(parent)
-    , ui(new Ui::ChessGameWindow) {
-    ui->setupUi(this);
+    , _ui(new Ui::ChessGameWindow) {
+    _ui->setupUi(this);
 
     setFixedSize({500,500});
     createMenuBar();
     createBoard();
+    createGameManager();
 }
 
 ChessGameWindow::~ChessGameWindow() {
-    delete ui;
+    if (_ui) {
+        delete _ui;
+    }
+    if (_gameManager) {
+      delete _gameManager;
+    }
 }
 
 void ChessGameWindow::createMenuBar() {
@@ -35,20 +38,10 @@ void ChessGameWindow::createBoard() {
 
     boardView->show();
     boardView->setScene(_boardGui);
+}
 
-    QColor colorBrown(150, 77, 34);
-    QColor colorLighBrown(238, 220, 151);
-    for (int i = 0; i < 8; ++i) {
-      for (int j = 0; j < 8; ++j) {
-          QGraphicsRectItem* rec = new QGraphicsRectItem(0,0,40,40);
-          if ((i + j) % 2 == 1) {
-              rec->setBrush(colorBrown);
-          } else {
-              rec->setBrush(colorLighBrown);
-          }
-          rec->setPos(j*40, i*40);
-          _boardGui->addItem(rec);
-      }
-    }
+void ChessGameWindow::createGameManager() {
+    _gameManager = new CGameManager();
+    _gameManager->init(_boardGui);
 }
 

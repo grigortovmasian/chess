@@ -1,6 +1,7 @@
 #include "cchesspiecerock.h"
 
-CChessPieceRock::CChessPieceRock(const QString& name) : CChessPiece(name)  {}
+CChessPieceRock::CChessPieceRock(const QString& name, QGraphicsItem* parent) :
+    CChessPiece(name, parent)  {}
 
 char CChessPieceRock::getSymbol() const {
     return 'R';

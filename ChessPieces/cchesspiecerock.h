@@ -6,7 +6,7 @@
 class CChessPieceRock : public CChessPiece
 {
 public:
-    CChessPieceRock(const QString& name);
+    CChessPieceRock(const QString& name, QGraphicsItem* parent);
     ~CChessPieceRock() {}
 
     // methods

@@ -6,7 +6,7 @@
 class CChessPieceBishop : public CChessPiece
 {
 public:
-    CChessPieceBishop(const QString& name);
+    CChessPieceBishop(const QString& name, QGraphicsItem* parent);
     ~CChessPieceBishop() {}
 
     // methods

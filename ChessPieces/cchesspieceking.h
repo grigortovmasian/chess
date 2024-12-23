@@ -5,7 +5,7 @@
 
 class CChessPieceKing : public CChessPiece {
 public:
-    CChessPieceKing(const QString& name);
+    CChessPieceKing(const QString& name, QGraphicsItem* parent);
     ~CChessPieceKing() {}
 
     // methods

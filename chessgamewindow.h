@@ -5,6 +5,8 @@
 #include <QGraphicsView>
 #include <QGraphicsScene>
 
+#include "GameEngine/cgamemanager.h"
+
 QT_BEGIN_NAMESPACE
 namespace Ui { class ChessGameWindow; }
 QT_END_NAMESPACE
@@ -19,9 +21,11 @@ public:
 private:
     void createMenuBar();
     void createBoard();
+    void createGameManager();
 
 private:
-    Ui::ChessGameWindow *ui;
+    Ui::ChessGameWindow* _ui;
+    CGameManager*       _gameManager{nullptr};
     QGraphicsScene*     _boardGui{nullptr};
 };
 #endif // CHESSGAMEWINDOW_H

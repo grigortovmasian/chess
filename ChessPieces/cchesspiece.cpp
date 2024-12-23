@@ -1,19 +1,16 @@
 #include "cchesspiece.h"
 
-CChessPiece::CChessPiece(const QString& name) {
-    QString path("C:\\Users\\grigo\\QTProjects\\ChessGame\\PiecesPhotos\\");
+CChessPiece::CChessPiece(const QString& name, QGraphicsItem* parent) {
+    QString path("..\\PiecesPhotos\\");
     path.append(name);
-    QPixmap pk(name);
+    path.append(".png");
+    QPixmap pk(path);
 
-    _imageGraphicItem = new QGraphicsPixmapItem(pk.scaled(40,40), nullptr);
+    _imageGraphicItem = new QGraphicsPixmapItem(pk.scaled(40,40), parent);
 
 }
 
-CChessPiece::~CChessPiece() {
-    if (_imageGraphicItem) {
-        delete _imageGraphicItem;
-    }
-}
+CChessPiece::~CChessPiece() {}
 
 char getSymbolFromType(const CChessPieceType& type) {
     switch (type) {

@@ -17,6 +17,7 @@ SOURCES += \
     ChessPieces/cchesspiecequeen.cpp \
     ChessPieces/cchesspiecerock.cpp \
     GameEngine/cboardposition.cpp \
+    GameEngine/cgamemanager.cpp \
     main.cpp \
     chessgamewindow.cpp
 
@@ -29,6 +30,7 @@ HEADERS += \
     ChessPieces/cchesspiecequeen.h \
     ChessPieces/cchesspiecerock.h \
     GameEngine/cboardposition.h \
+    GameEngine/cgamemanager.h \
     chessgamewindow.h
 
 FORMS += \

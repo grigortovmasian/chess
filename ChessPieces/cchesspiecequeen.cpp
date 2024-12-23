@@ -1,6 +1,7 @@
 #include "cchesspiecequeen.h"
 
-CChessPieceQueen::CChessPieceQueen(const QString& name) : CChessPiece(name)  {}
+CChessPieceQueen::CChessPieceQueen(const QString& name, QGraphicsItem* parent) :
+    CChessPiece(name, parent)  {}
 
 char CChessPieceQueen::getSymbol() const {
     return 'Q';
