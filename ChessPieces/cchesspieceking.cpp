@@ -1,7 +1,7 @@
 #include "cchesspieceking.h"
 
-CChessPieceKing::CChessPieceKing(const QString& name, QGraphicsItem* parent) :
-    CChessPiece(name, parent)  {}
+CChessPieceKing::CChessPieceKing(bool isWhite, QGraphicsItem* parent) :
+    CChessPiece("king", isWhite, parent)  {}
 
 char CChessPieceKing::getSymbol() const {
     return 'K';

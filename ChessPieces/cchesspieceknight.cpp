@@ -1,7 +1,7 @@
 #include "cchesspieceknight.h"
 
-CChessPieceKnight::CChessPieceKnight(const QString& name, QGraphicsItem* parent) :
-    CChessPiece(name, parent)  {}
+CChessPieceKnight::CChessPieceKnight(bool isWhite, QGraphicsItem* parent) :
+    CChessPiece("knight", isWhite, parent)  {}
 
 char CChessPieceKnight::getSymbol() const {
     return 'N';

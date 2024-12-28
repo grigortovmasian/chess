@@ -21,11 +21,13 @@ char getSymbolFromType(const CChessPieceType& type);
 
 class CChessPiece {
 public:
-    CChessPiece(const QString& name, QGraphicsItem* parent);
+    CChessPiece(const QString& name, bool isWhite, QGraphicsItem* parent);
     virtual ~CChessPiece();
 
     virtual char getSymbol() const = 0;
     virtual CChessPieceType getType () const = 0;
+    bool isBlackPiece() const { return !_isWhite; }
+    bool isWhitePiece() const { return _isWhite; }
 
     // This function will return all the possible moves
     // Here we only check the indexes to be fit in board cause we don't know the position
@@ -38,6 +40,7 @@ public:
 protected:
   QGraphicsPixmapItem* _imageGraphicItem;
   CBoardPosition       _currentPos;
+  bool                 _isWhite{true};
 };
 
 #endif // CCHESSPIECE_H

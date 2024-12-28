@@ -6,7 +6,7 @@
 class CChessPieceQueen : public CChessPiece
 {
 public:
-    CChessPieceQueen(const QString& name, QGraphicsItem* parent);
+    CChessPieceQueen(bool isWhite, QGraphicsItem* parent);
     ~CChessPieceQueen() {}
 
     // methods

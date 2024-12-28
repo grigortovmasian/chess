@@ -1,7 +1,14 @@
 #include "cchesspiece.h"
 
-CChessPiece::CChessPiece(const QString& name, QGraphicsItem* parent) {
+CChessPiece::CChessPiece(const QString& name,
+                         bool isWhite,
+                         QGraphicsItem* parent) : _isWhite (isWhite) {
     QString path("..\\PiecesPhotos\\");
+    if (isWhite) {
+      path.append("white-");
+    } else {
+        path.append("black-");
+    }
     path.append(name);
     path.append(".png");
     QPixmap pk(path);

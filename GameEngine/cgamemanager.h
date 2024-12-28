@@ -3,7 +3,10 @@
 
 #include "cboardposition.h"
 #include <QVector>
+#include <QPair>
 #include <QGraphicsRectItem>
+
+class CChessPiece;
 
 class CGameManager {
 public:
@@ -17,7 +20,7 @@ private:
 private:
     // Here I want to correct indexes the way that 0 - 7 vector will be 1 - 8 row
     // And each 0 - 7 index in vectors will be A - H
-    QVector<QVector<QGraphicsRectItem*>> _board;
+    QVector<QVector<QPair<QGraphicsRectItem*, CChessPiece*>>> _board;
 };
 
 #endif // CGAMEMANAGER_H

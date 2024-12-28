@@ -1,19 +1,19 @@
-#ifndef CCHESSPIECEKING_H
-#define CCHESSPIECEKING_H
+#ifndef CCHESSPIECEROOK_H
+#define CCHESSPIECEROOK_H
 
 #include "cchesspiece.h"
 
-class CChessPieceKing : public CChessPiece {
+class CChessPieceRook : public CChessPiece
+{
 public:
-    CChessPieceKing(bool isWhite, QGraphicsItem* parent);
-    ~CChessPieceKing() {}
+    CChessPieceRook(bool isWhite, QGraphicsItem* parent);
+    ~CChessPieceRook() {}
 
     // methods
     char getSymbol() const override;
     CChessPieceType getType () const override;
 
     QVector<CBoardPosition> getAllRechablePositions() const override;
-
 };
 
-#endif // CCHESSPIECEKING_H
+#endif // CCHESSPIECEROOK_H

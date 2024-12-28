@@ -15,7 +15,7 @@ SOURCES += \
     ChessPieces/cchesspieceknight.cpp \
     ChessPieces/cchesspiecepawn.cpp \
     ChessPieces/cchesspiecequeen.cpp \
-    ChessPieces/cchesspiecerock.cpp \
+    ChessPieces/cchesspiecerook.cpp \
     GameEngine/cboardposition.cpp \
     GameEngine/cgamemanager.cpp \
     main.cpp \
@@ -28,7 +28,7 @@ HEADERS += \
     ChessPieces/cchesspieceknight.h \
     ChessPieces/cchesspiecepawn.h \
     ChessPieces/cchesspiecequeen.h \
-    ChessPieces/cchesspiecerock.h \
+    ChessPieces/cchesspiecerook.h \
     GameEngine/cboardposition.h \
     GameEngine/cgamemanager.h \
     chessgamewindow.h

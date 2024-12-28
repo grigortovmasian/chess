@@ -1,7 +1,7 @@
 #include "cchesspiecepawn.h"
 
-CChessPiecePawn::CChessPiecePawn(const QString& name, QGraphicsItem* parent) :
-    CChessPiece(name, parent)  {}
+CChessPiecePawn::CChessPiecePawn(bool isWhite, QGraphicsItem* parent) :
+    CChessPiece("pawn", isWhite, parent)  {}
 
 char CChessPiecePawn::getSymbol() const {
     return 'P';

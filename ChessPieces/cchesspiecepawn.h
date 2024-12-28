@@ -6,7 +6,7 @@
 class CChessPiecePawn : public CChessPiece
 {
 public:
-    CChessPiecePawn(const QString& name, QGraphicsItem* parent);
+    CChessPiecePawn(bool isWhite, QGraphicsItem* parent);
     ~CChessPiecePawn() {}
 
     // methods
