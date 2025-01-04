@@ -1,27 +1,31 @@
 #ifndef CBOARDPOSITION_H
 #define CBOARDPOSITION_H
 
-
-class CBoardPosition
-{
+class CBoardPosition {
 public:
-    CBoardPosition();
+    CBoardPosition(unsigned row = 0, unsigned column = 0);
     CBoardPosition(const CBoardPosition& other);
     CBoardPosition& operator=(const CBoardPosition& other);
 
-    int getNumber() const;
-    int getCharIndex() const;
+    unsigned getNumber() const;
+    unsigned getCharIndex() const;
     char getChar() const;
 
     // set functions
-    void setNumber(const int& newNumber);
-    void setCharIndex(const int& newCharIndex);
+    void setNumber(const unsigned& newNumber);
+    void setCharIndex(const unsigned& newCharIndex);
     void setNewPosition(const CBoardPosition& newPos);
-    void setNewPosition(const int& newNumber, const int& newCharIndex);
+    void setNewPosition(const unsigned& newNumber, const unsigned& newCharIndex);
+
+    bool operator==(const CBoardPosition& other) const {
+      return _number == other._number && _charIndex == other._charIndex;
+    }
 
 private:
-    int _number; // 1 - 8
-    int _charIndex; // 1 - 8 for A - H respectivly
+    unsigned _number; // 1 - 8
+    unsigned _charIndex; // 1 - 8 for A - H respectivly
 };
+
+unsigned qHash(const CBoardPosition& pos);
 
 #endif // CBOARDPOSITION_H

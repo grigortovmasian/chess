@@ -5,6 +5,9 @@
 #include <QToolBar>
 #include <QWidget>
 #include <QHBoxLayout>
+#include <QTransform>
+#include <QMouseEvent>
+#include <QPointF>
 
 ChessGameWindow::ChessGameWindow(QWidget* parent)
     : QMainWindow(parent)
@@ -15,6 +18,7 @@ ChessGameWindow::ChessGameWindow(QWidget* parent)
     createMenuBar();
     createBoard();
     createGameManager();
+    grabMouse();
 }
 
 ChessGameWindow::~ChessGameWindow() {
@@ -26,22 +30,31 @@ ChessGameWindow::~ChessGameWindow() {
     }
 }
 
+void ChessGameWindow::mouseReleaseEvent(QMouseEvent* event) {
+   QMainWindow::mouseReleaseEvent(event);
+   QPointF scenePos = _boardView->mapToScene(event->pos());
+   // Add offset to center the mouse and get correct object
+   // TODO understand how to get graphcis item and not piece picture
+   scenePos.setY(scenePos.y() - 20);
+   QList<QGraphicsItem*> items = _boardView->scene()->items(scenePos);
+   _gameManager->itemSelected(items);
+}
+
 void ChessGameWindow::createMenuBar() {
     auto newGame = this->menuBar();
     newGame->addMenu("New Game");
 }
-
 void ChessGameWindow::createBoard() {
-    QGraphicsView* boardView = new QGraphicsView(this);
-    this->setCentralWidget(boardView);
-    _boardGui = new QGraphicsScene();
+    _boardView = new QGraphicsView(this);
+    this->setCentralWidget(_boardView);
+    QGraphicsScene* boardGui = new QGraphicsScene();
 
-    boardView->show();
-    boardView->setScene(_boardGui);
+    _boardView->show();
+    _boardView->setScene(boardGui);
 }
 
 void ChessGameWindow::createGameManager() {
     _gameManager = new CGameManager();
-    _gameManager->init(_boardGui);
+    _gameManager->init(_boardView->scene());
 }
 

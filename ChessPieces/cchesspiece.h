@@ -39,7 +39,6 @@ public:
 
 protected:
   QGraphicsPixmapItem* _imageGraphicItem;
-  CBoardPosition       _currentPos;
   bool                 _isWhite{true};
 };
 

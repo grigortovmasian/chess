@@ -14,7 +14,6 @@ CChessPiece::CChessPiece(const QString& name,
     QPixmap pk(path);
 
     _imageGraphicItem = new QGraphicsPixmapItem(pk.scaled(40,40), parent);
-
 }
 
 CChessPiece::~CChessPiece() {}

@@ -2,9 +2,9 @@
 
 #include <QtGlobal>
 
-CBoardPosition::CBoardPosition() :
-    _number(0),
-    _charIndex(0) {
+CBoardPosition::CBoardPosition(unsigned row, unsigned column) :
+    _number(row),
+    _charIndex(column) {
 }
 
 CBoardPosition::CBoardPosition(const CBoardPosition &other) :
@@ -20,11 +20,11 @@ CBoardPosition& CBoardPosition::operator=(const CBoardPosition &other) {
     return (*this);
 }
 
-int CBoardPosition::getNumber() const {
+unsigned CBoardPosition::getNumber() const {
     return _number;
 }
 
-int CBoardPosition::getCharIndex() const {
+unsigned CBoardPosition::getCharIndex() const {
     return _charIndex;
 }
 
@@ -34,12 +34,12 @@ char CBoardPosition::getChar() const {
 
 }
 
-void CBoardPosition::setNumber(const int& newNumber) {
+void CBoardPosition::setNumber(const unsigned& newNumber) {
     _number = newNumber;
 
 }
 
-void CBoardPosition::setCharIndex(const int& newCharIndex) {
+void CBoardPosition::setCharIndex(const unsigned& newCharIndex) {
     _charIndex = newCharIndex;
 }
 
@@ -47,7 +47,11 @@ void CBoardPosition::setNewPosition(const CBoardPosition& newPos) {
     (*this) = newPos;
 }
 
-void CBoardPosition::setNewPosition(const int& newNumber, const int& newCharIndex) {
+void CBoardPosition::setNewPosition(const unsigned& newNumber, const unsigned& newCharIndex) {
     setNumber(newNumber);
     setCharIndex(newCharIndex);
+}
+
+unsigned qHash(const CBoardPosition &pos) {
+    return pos.getNumber() * 8 + pos.getCharIndex();
 }

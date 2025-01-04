@@ -18,6 +18,8 @@ public:
     ChessGameWindow(QWidget *parent = nullptr);
     ~ChessGameWindow();
 
+    virtual void mouseReleaseEvent(QMouseEvent *event);
+
 private:
     void createMenuBar();
     void createBoard();
@@ -25,7 +27,7 @@ private:
 
 private:
     Ui::ChessGameWindow* _ui;
-    CGameManager*       _gameManager{nullptr};
-    QGraphicsScene*     _boardGui{nullptr};
+    CGameManager*        _gameManager{nullptr};
+    QGraphicsView*       _boardView{nullptr};
 };
 #endif // CHESSGAMEWINDOW_H
