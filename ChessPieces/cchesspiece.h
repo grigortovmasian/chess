@@ -8,10 +8,12 @@
 
 #include "GameEngine/cboardposition.h"
 
+using PositionVector_t = QVector<CBoardPosition>;
+
 enum CChessPieceType {
     KING = 0,
     QUEEN,
-    ROCK,
+    ROOK,
     BISHOP,
     KNIGHT,
     PAWN
@@ -29,17 +31,27 @@ public:
     bool isBlackPiece() const { return !_isWhite; }
     bool isWhitePiece() const { return _isWhite; }
 
+    bool isPawn() const;
+    bool isBishop() const;
+    bool isKnight() const;
+    bool isRook() const;
+    bool isQueen() const;
+    bool isKing() const;
+
     // This function will return all the possible moves
     // Here we only check the indexes to be fit in board cause we don't know the position
     // of other pieces
     // Game Analyzer should analyze each of them to see if the move is possible.
     // for example is there any other figure that block the path to it. or maybe
     // it's check situation and the piece can't move at all.
-    virtual QVector<CBoardPosition> getAllRechablePositions() const = 0;
+    virtual PositionVector_t getAllRechablePositions(const CBoardPosition& currentPos) const = 0;
 
 protected:
-  QGraphicsPixmapItem* _imageGraphicItem;
-  bool                 _isWhite{true};
+    PositionVector_t getAllRechablePositionsRook(const CBoardPosition& currentPos) const;
+    PositionVector_t getAllRechablePositionsBishop(const CBoardPosition& currentPos) const;
+
+    QGraphicsPixmapItem* _imageGraphicItem;
+    bool                 _isWhite{true};
 };
 
 #endif // CCHESSPIECE_H

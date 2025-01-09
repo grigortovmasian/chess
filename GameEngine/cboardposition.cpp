@@ -5,17 +5,20 @@
 CBoardPosition::CBoardPosition(unsigned row, unsigned column) :
     _number(row),
     _charIndex(column) {
+    _color = (row + column) % 2 == 1;
 }
 
 CBoardPosition::CBoardPosition(const CBoardPosition &other) :
     _number(other._number),
-    _charIndex(other._charIndex) {
+    _charIndex(other._charIndex),
+    _color(other._color) {
 
 }
 
 CBoardPosition& CBoardPosition::operator=(const CBoardPosition &other) {
     setNumber(other.getNumber());
     setCharIndex(other.getCharIndex());
+    _color = other._color;
 
     return (*this);
 }

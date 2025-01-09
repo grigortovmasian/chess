@@ -8,10 +8,11 @@ char CChessPieceRook::getSymbol() const {
 }
 
 CChessPieceType CChessPieceRook::getType() const {
-    return CChessPieceType::ROCK;
+    return CChessPieceType::ROOK;
 }
 
-QVector<CBoardPosition> CChessPieceRook::getAllRechablePositions() const {
-    QVector<CBoardPosition> ret;
+PositionVector_t CChessPieceRook::getAllRechablePositions(const CBoardPosition& currentPos) const {
+    PositionVector_t ret;
+    ret.append(getAllRechablePositionsRook(currentPos));
     return ret;
 }

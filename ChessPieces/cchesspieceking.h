@@ -12,7 +12,7 @@ public:
     char getSymbol() const override;
     CChessPieceType getType () const override;
 
-    QVector<CBoardPosition> getAllRechablePositions() const override;
+   PositionVector_t getAllRechablePositions(const CBoardPosition& currentPos) const override;
 
 };
 

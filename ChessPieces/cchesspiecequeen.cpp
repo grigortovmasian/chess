@@ -11,7 +11,9 @@ CChessPieceType CChessPieceQueen::getType() const {
     return CChessPieceType::QUEEN;
 }
 
-QVector<CBoardPosition> CChessPieceQueen::getAllRechablePositions() const {
-    QVector<CBoardPosition> ret;
+PositionVector_t CChessPieceQueen::getAllRechablePositions(const CBoardPosition& currentPos) const {
+    PositionVector_t ret;
+    ret.append(getAllRechablePositionsRook(currentPos));
+    ret.append(getAllRechablePositionsBishop(currentPos));
     return ret;
 }
