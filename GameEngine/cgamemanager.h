@@ -24,6 +24,9 @@ private:
     void createChessPieces();
     void setDefaultColor(QGraphicsRectItem* item, const CBoardPosition& pos);
 
+    bool isWhiteMove() const { return _currentMove; }
+    bool isBlackMove() const { return !isWhiteMove(); }
+
 private:
     // Here I want to correct indexes the way that 0 - 7 vector will be 1 - 8 row
     // And each 0 - 7 index in vectors will be A - H
@@ -33,6 +36,7 @@ private:
     QHash<CChessPiece*, CBoardPosition> _pieceToPosMap;
     PositionVector_t                    _possibleMoves;
     QGraphicsRectItem*                  _currentSelectedItem{nullptr};
+    bool                                _currentMove{true};
 };
 
 #endif // CGAMEMANAGER_H

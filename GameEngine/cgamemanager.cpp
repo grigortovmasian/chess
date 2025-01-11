@@ -167,7 +167,7 @@ void CGameManager::itemSelected(const QList<QGraphicsItem*>& selectedItems) {
                 _possibleMoves.clear();
             } else {                
                 CChessPiece* currentPiece = _itemToPieceMap[selectedItemCustom];
-                if (currentPiece) {
+                if (currentPiece && currentPiece->isWhitePiece() == isWhiteMove()) {
                     // there is some piece
                     _currentSelectedItem = selectedItemCustom;
                     selectedItemCustom->setBrush(Qt::green);
