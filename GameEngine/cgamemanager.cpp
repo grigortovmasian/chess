@@ -33,6 +33,7 @@ void CGameManager::createBoardCells(QGraphicsScene* scene) {
           cell->setPos(j*40, i*40);
           scene->addItem(cell);
           _boardItems.insert({boardSize - i - 1, j}, cell);
+          _itemToPosMap.insert(cell, {boardSize - i - 1, j});
           setDefaultColor(cell, {boardSize - i - 1, j});
         }
     }
@@ -148,23 +149,66 @@ void CGameManager::setDefaultColor(QGraphicsRectItem* item, const CBoardPosition
     }
 }
 
+void CGameManager::movePiece(QGraphicsRectItem* newItem) {
+    // firt check if spot is open
+    CChessPiece* pieceInNewPos = _itemToPieceMap[newItem];
+    CChessPiece* currentPiece = _itemToPieceMap[_currentSelectedItem];
+    Q_ASSERT(currentPiece);
+    if (pieceInNewPos) {
+        // capture scenario;
+        pieceInNewPos->changeParentItem(nullptr);
+        delete pieceInNewPos;
+        pieceInNewPos = nullptr;
+        _pieceToPosMap.remove(pieceInNewPos);
+    }
+    // handle internal maps
+    currentPiece->changeParentItem(newItem);
+    _itemToPieceMap[_currentSelectedItem] = nullptr;
+    _itemToPieceMap[newItem] = currentPiece;
+    _pieceToPosMap [currentPiece] = _itemToPosMap[newItem];
+    _currentMove = !_currentMove;
+}
+
+void CGameManager::resetSelectedItem() {
+    setDefaultColor(_currentSelectedItem, _itemToPosMap[_currentSelectedItem]);
+    _currentSelectedItem = nullptr;
+    for (const QVector<CBoardPosition>& posVec : _possibleMoves) {
+        for (const CBoardPosition& pos : posVec) {
+            setDefaultColor(_boardItems[pos], pos);
+        }
+    }
+    _possibleMoves.clear();
+}
+
+bool CGameManager::isSelectedPositionReachable(QGraphicsRectItem* newItem) const {
+    Q_ASSERT(newItem);
+    for (const QVector<CBoardPosition>& posVec : _possibleMoves) {
+        if  (posVec.contains(_itemToPosMap[newItem])) {
+            return true;
+        }
+    }
+    return false;
+}
+
 void CGameManager::itemSelected(const QList<QGraphicsItem*>& selectedItems) {
     for (QGraphicsItem* item : selectedItems) {
         QGraphicsRectItem* selectedItemCustom = dynamic_cast<QGraphicsRectItem*>(item);
         if (selectedItemCustom) {
-            if (_currentSelectedItem && _currentSelectedItem != selectedItemCustom) {
-                break;
-            }
             if (_currentSelectedItem) {
+                // If we selected the selected item again that's mean we just need to undo the color change
+                if (_currentSelectedItem == selectedItemCustom) {
+                    resetSelectedItem();
+                } else if (isSelectedPositionReachable(selectedItemCustom)) {
+                    // okay here we will do the move
+                    movePiece(selectedItemCustom);
+                    resetSelectedItem();
+                } else {
+                    // do nothing
+                }
                 // here we analyze if the selected pos possible destination for selected piece
                 // is move possible ? do it else keep it
                 // if it's selected object than simply unselect it
-                setDefaultColor(_currentSelectedItem, _pieceToPosMap[_itemToPieceMap[selectedItemCustom]]);
-                _currentSelectedItem = nullptr;
-                for (const CBoardPosition& pos : _possibleMoves) {
-                    setDefaultColor(_boardItems[pos], pos);
-                }
-                _possibleMoves.clear();
+
             } else {                
                 CChessPiece* currentPiece = _itemToPieceMap[selectedItemCustom];
                 if (currentPiece && currentPiece->isWhitePiece() == isWhiteMove()) {
@@ -174,9 +218,11 @@ void CGameManager::itemSelected(const QList<QGraphicsItem*>& selectedItems) {
                     // Now get possible moves
                     _possibleMoves = currentPiece->getAllRechablePositions(_pieceToPosMap[currentPiece]);
                     // higligth them
-                    for (const CBoardPosition& pos : _possibleMoves) {
-                        QGraphicsRectItem* item = _boardItems[pos];
-                        item->setBrush(Qt::red);
+                    for (const QVector<CBoardPosition>& posVec : _possibleMoves) {
+                        for (const CBoardPosition& pos : posVec) {
+                            QGraphicsRectItem* item = _boardItems[pos];
+                            item->setBrush(Qt::red);
+                        }
                     }
                 }
             }

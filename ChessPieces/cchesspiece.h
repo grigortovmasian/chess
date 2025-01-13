@@ -8,7 +8,11 @@
 
 #include "GameEngine/cboardposition.h"
 
-using PositionVector_t = QVector<CBoardPosition>;
+// each vector is consecutive moves on same direction
+// so if there is something in the way we will eliminate entire direction
+using PositionVecVec_t = QVector<QVector<CBoardPosition>>;
+// this represent the direction
+using PositionVec_t = QVector<CBoardPosition>;
 
 enum CChessPieceType {
     KING = 0,
@@ -38,17 +42,19 @@ public:
     bool isQueen() const;
     bool isKing() const;
 
+    void changeParentItem(QGraphicsItem* parent);
+
     // This function will return all the possible moves
     // Here we only check the indexes to be fit in board cause we don't know the position
     // of other pieces
     // Game Analyzer should analyze each of them to see if the move is possible.
     // for example is there any other figure that block the path to it. or maybe
     // it's check situation and the piece can't move at all.
-    virtual PositionVector_t getAllRechablePositions(const CBoardPosition& currentPos) const = 0;
+    virtual PositionVecVec_t getAllRechablePositions(const CBoardPosition& currentPos) const = 0;
 
 protected:
-    PositionVector_t getAllRechablePositionsRook(const CBoardPosition& currentPos) const;
-    PositionVector_t getAllRechablePositionsBishop(const CBoardPosition& currentPos) const;
+    PositionVecVec_t getAllRechablePositionsRook(const CBoardPosition& currentPos) const;
+    PositionVecVec_t getAllRechablePositionsBishop(const CBoardPosition& currentPos) const;
 
     QGraphicsPixmapItem* _imageGraphicItem;
     bool                 _isWhite{true};

@@ -16,7 +16,9 @@ CChessPiece::CChessPiece(const QString& name,
     _imageGraphicItem = new QGraphicsPixmapItem(pk.scaled(40,40), parent);
 }
 
-CChessPiece::~CChessPiece() {}
+CChessPiece::~CChessPiece() {
+    delete _imageGraphicItem;
+}
 
 bool CChessPiece::isPawn() const {
     return getType() == CChessPieceType::PAWN;
@@ -42,37 +44,52 @@ bool CChessPiece::isKing() const {
     return getType() == CChessPieceType::KING;
 }
 
-PositionVector_t CChessPiece::getAllRechablePositionsRook(const CBoardPosition& currentPos) const {
-    PositionVector_t ret;
+void CChessPiece::changeParentItem(QGraphicsItem* parent) {
+    _imageGraphicItem->setParentItem(parent);
+}
+
+PositionVecVec_t CChessPiece::getAllRechablePositionsRook(const CBoardPosition& currentPos) const {
+    PositionVecVec_t ret;
     // Add everything to left.
+    PositionVec_t vecLeft;
     for (unsigned i = 0; i < currentPos.getCharIndex(); ++i) {
-        ret.append(CBoardPosition(currentPos.getNumber(), i));
+        vecLeft.append(CBoardPosition(currentPos.getNumber(), i));
     }
+    ret.append(vecLeft);
 
     // Add everything to righ.
+    PositionVec_t vecRight;
     for (unsigned i = currentPos.getCharIndex() + 1; i < 8 ; ++i) {
-        ret.append(CBoardPosition(currentPos.getNumber(), i));
+        vecRight.append(CBoardPosition(currentPos.getNumber(), i));
     }
+    ret.append(vecRight);
 
     // Add everything to up.
+    PositionVec_t vecUp;
     for (unsigned i = currentPos.getNumber() + 1; i < 8 ; ++i) {
-        ret.append(CBoardPosition(i, currentPos.getCharIndex()));
+        vecUp.append(CBoardPosition(i, currentPos.getCharIndex()));
     }
+    ret.append(vecUp);
 
     // Add everything to down.
+    PositionVec_t vecDown;
     for (unsigned i = 0; i < currentPos.getNumber(); ++i) {
-        ret.append(CBoardPosition(i, currentPos.getCharIndex()));
+        vecDown.append(CBoardPosition(i, currentPos.getCharIndex()));
     }
+    ret.append(vecDown);
+
     return ret;
 }
 
-PositionVector_t CChessPiece::getAllRechablePositionsBishop(const CBoardPosition& currentPos) const {
-    PositionVector_t ret;
-    // Add everything to up left.
+PositionVecVec_t CChessPiece::getAllRechablePositionsBishop(const CBoardPosition& currentPos) const {
+    PositionVecVec_t ret;
     unsigned i = currentPos.getNumber();
     unsigned j = currentPos.getCharIndex();
     Q_ASSERT(i <= 7);
     Q_ASSERT(j <= 7);
+
+    // Add everything to up left.
+    PositionVec_t vecUpLeft;
     while (true) {
         if (i == 7) {
           break;
@@ -82,10 +99,12 @@ PositionVector_t CChessPiece::getAllRechablePositionsBishop(const CBoardPosition
         }
         ++i;
         --j;
-        ret.append(CBoardPosition(i, j));
+        vecUpLeft.append(CBoardPosition(i, j));
     }
+    ret.append(vecUpLeft);
 
     // Add everything to up righ.
+    PositionVec_t vecUpRigth;
     i = currentPos.getNumber();
     j = currentPos.getCharIndex();
     while (true) {
@@ -97,10 +116,12 @@ PositionVector_t CChessPiece::getAllRechablePositionsBishop(const CBoardPosition
         }
         ++i;
         ++j;
-        ret.append(CBoardPosition(i, j));
+        vecUpRigth.append(CBoardPosition(i, j));
     }
+    ret.append(vecUpRigth);
 
     // Add everything to dawn left.
+    PositionVec_t vecDawnLeft;
     i = currentPos.getNumber();
     j = currentPos.getCharIndex();
     while (true) {
@@ -112,10 +133,12 @@ PositionVector_t CChessPiece::getAllRechablePositionsBishop(const CBoardPosition
         }
         --i;
         --j;
-        ret.append(CBoardPosition(i, j));
+        vecDawnLeft.append(CBoardPosition(i, j));
     }
+    ret.append(vecDawnLeft);
 
     // Add everything to down righ.
+    PositionVec_t vecDownRight;
     i = currentPos.getNumber();
     j = currentPos.getCharIndex();
     while (true) {
@@ -127,8 +150,9 @@ PositionVector_t CChessPiece::getAllRechablePositionsBishop(const CBoardPosition
         }
         --i;
         ++j;
-        ret.append(CBoardPosition(i, j));
+        vecDownRight.append(CBoardPosition(i, j));
     }
+    ret.append(vecDownRight);
     return ret;
 }
 

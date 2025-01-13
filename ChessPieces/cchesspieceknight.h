@@ -13,7 +13,7 @@ public:
     char getSymbol() const override;
     CChessPieceType getType () const override;
 
-    PositionVector_t getAllRechablePositions(const CBoardPosition& currentPos) const override;
+    PositionVecVec_t getAllRechablePositions(const CBoardPosition& currentPos) const override;
 };
 
 #endif // CCHESSPIECEKNIGHT_H

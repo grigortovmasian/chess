@@ -11,8 +11,8 @@ CChessPieceType CChessPieceRook::getType() const {
     return CChessPieceType::ROOK;
 }
 
-PositionVector_t CChessPieceRook::getAllRechablePositions(const CBoardPosition& currentPos) const {
-    PositionVector_t ret;
+PositionVecVec_t CChessPieceRook::getAllRechablePositions(const CBoardPosition& currentPos) const {
+    PositionVecVec_t ret;
     ret.append(getAllRechablePositionsRook(currentPos));
     return ret;
 }

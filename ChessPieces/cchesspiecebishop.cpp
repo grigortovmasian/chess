@@ -11,8 +11,8 @@ CChessPieceType CChessPieceBishop::getType() const {
     return CChessPieceType::BISHOP;
 }
 
-PositionVector_t CChessPieceBishop::getAllRechablePositions(const CBoardPosition& currentPos) const {
-    PositionVector_t ret;
+PositionVecVec_t CChessPieceBishop::getAllRechablePositions(const CBoardPosition& currentPos) const {
+    PositionVecVec_t ret;
     ret.append(getAllRechablePositionsBishop(currentPos));
     return ret;
 }
